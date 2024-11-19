@@ -1,6 +1,14 @@
 public static class ExtObject
 { 
-    public static T DeepCopy<T>(this T objectToCopy) 
+    public static T DeepCopy<T>(this T objectToCopy)
+    {
+        var jsonString = JsonSerializer.Serialize(objectToCopy);
+
+        return JsonSerializer.Deserialize<T>(jsonString)!;
+    }
+
+    //obsolete
+    public static T DeepCopyBinary<T>(this T objectToCopy) 
     {
          MemoryStream memoryStream = new MemoryStream(); 
          BinaryFormatter binaryFormatter = new BinaryFormatter(); 
