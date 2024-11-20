@@ -1,5 +1,12 @@
 public static class ExtObject
 { 
+    public static T DeepCopy<T>(this T objectToCopy, JsonSerializerOptions? options = null)
+    {
+        var jsonString = JsonSerializer.Serialize(objectToCopy, options);
+
+        return JsonSerializer.Deserialize<T>(jsonString, options)!;
+    }
+    
     public static T DeepCopy<T>(this T objectToCopy)
     {
         var jsonString = JsonSerializer.Serialize(objectToCopy);
